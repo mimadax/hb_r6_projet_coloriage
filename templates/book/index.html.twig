@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des livres{% endblock %}
+
+{% block body %}
+    <h1>Liste des livres</h1>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        {% for book in books %}
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ book.title }}</h5>
+                        <p class="card-text">Auteur : {{ book.author }}</p>
+                        <a href="{{ path('book_detail', {'id': book.id}) }}" class="btn btn-primary">Détails</a>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div>Aucun livre trouvé</div>
+        {% endfor %}
+    </div>
+{% endblock %}
