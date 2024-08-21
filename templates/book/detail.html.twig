@@ -5,9 +5,22 @@
 {% block body %}
     <div class="container mt-4">
         <h1>{{ book.title }}</h1>
+
+        {% if book.imageFilename %}
+            <div class="mb-4">
+                <img 
+                    src="{{ asset('uploads/images/' ~ book.imageFilename) }}" 
+                    alt="{{ book.title }}" 
+                    class="img-fluid"
+                    style="max-width: 500px; max-height: 500px; object-fit: contain;"
+                >
+            </div>
+        {% endif %}
+
         <p><strong>Auteur :</strong> {{ book.author }}</p>
         <p><strong>Date de publication :</strong> {{ book.publishedDate|date('d/m/Y') }}</p>
         <p><strong>Description :</strong> {{ book.description }}</p>
+
         <a href="{{ path('book_list') }}" class="btn btn-secondary">Retour à la liste</a>
     </div>
 {% endblock %}

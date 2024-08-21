@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un nouveau livre{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>Ajouter un nouveau livre</h1>
+
+        {{ form_start(form) }}
+        
+        <div class="form-group mb-3">
+            {{ form_label(form.title, 'Titre du livre') }}
+            {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="form-group mb-3">
+            {{ form_label(form.author, 'Auteur') }}
+            {{ form_widget(form.author, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="form-group mb-3">
+            {{ form_label(form.publishedDate, 'Date de publication') }}
+            {{ form_widget(form.publishedDate, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="form-group mb-3">
+            {{ form_label(form.description, 'Description') }}
+            {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="form-group mb-3">
+            {{ form_label(form.imageFilename, 'Image du livre') }}
+            {{ form_widget(form.imageFilename, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+
+        {{ form_end(form) }}
+
+        <a href="{{ path('book_list') }}" class="btn btn-secondary mt-3">Annuler</a>
+    </div>
+{% endblock %}
