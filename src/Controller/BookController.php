@@ -15,17 +15,32 @@ use Symfony\Component\Routing\Annotation\Route;
 class BookController extends AbstractController
 {
     #[Route('/', name: 'book_list')]
-    public function index(EntityManagerInterface $entityManager, BookRepository $bookRepository, Request $request): Response
+    public function index(Request $request, BookRepository $bookRepository): Response
     {
-        $searchData = new SearchData();
-        $searchForm = $this->createForm(SearchBookType::class, $searchData);
-        $searchForm->handleRequest($request);
+        // Étape 1 : Créer le formulaire de recherche
+        $form = $this->createForm(SearchBookType::class);
 
-        $books = $bookRepository->findBySearch($searchData);
+        // Étape 2 : Gérer la soumission du formulaire
+        $form->handleRequest($request);
 
+        // Étape 3 : Initialiser les livres (afficher tous les livres par défaut)
+        $books = [];
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Étape 4 : Récupérer le terme de recherche
+            $searchData = $form->getData();
+
+            // Étape 5 : Chercher les livres correspondants
+            $books = $bookRepository->findByTitle($searchData['q']);
+        } else {
+            // Si le formulaire n'est pas soumis, afficher tous les livres
+            $books = $bookRepository->findAll();
+        }
+
+        // Étape 6 : Renvoyer la vue avec le formulaire et les résultats
         return $this->render('book/index.html.twig', [
             'books' => $books,
-            'search_form' => $searchForm->createView(),
+            'search_form' => $form->createView(),
         ]);
     }
 

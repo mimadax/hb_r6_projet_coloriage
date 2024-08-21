@@ -6,6 +6,7 @@
     <div class="container mt-4">
         <h1>Liste des livres</h1>
 
+        {# Formulaire de recherche #}
         {{ form_start(search_form, {'attr': {'class': 'form-inline'}}) }}
             <div class="form-group mb-2">
                 {{ form_row(search_form.q, {'attr': {'class': 'form-control', 'placeholder': 'Rechercher un livre...'}}) }}

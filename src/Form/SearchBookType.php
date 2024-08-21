@@ -2,7 +2,6 @@
 
 namespace App\Form;
 
-use App\Model\SearchData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -16,23 +15,17 @@ class SearchBookType extends AbstractType
             ->add('q', SearchType::class, [
                 'label' => false,
                 'attr' => [
-                    'placeholder' => 'Rechercher un livre par titre...',
+                    'placeholder' => 'Rechercher un livre...',
                 ],
-                'required' => false,
             ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
+        // Aucune classe de données nécessaire ici car ce formulaire est indépendant d'une entité.
         $resolver->setDefaults([
-            'data_class' => SearchData::class,
-            'method' => 'GET',
-            'csrf_protection' => false,
+            'method' => 'GET',  // Utilisation de la méthode GET pour afficher la recherche dans l'URL.
+            'csrf_protection' => false,  // Pas besoin de protection CSRF pour une recherche simple.
         ]);
-    }
-
-    public function getBlockPrefix()
-    {
-        return ''; // This is to avoid having the form fields prefixed with 'search_data'
     }
 }
