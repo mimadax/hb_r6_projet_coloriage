@@ -3,9 +3,11 @@
 {% block title %}Détails du livre{% endblock %}
 
 {% block body %}
-    <h1>{{ book.title }}</h1>
-    <p>Auteur : {{ book.author }}</p>
-    <p>Date de publication : {{ book.publishedDate|date('d/m/Y') }}</p>
-    <p>{{ book.description }}</p>
-    <a href="{{ path('book_list') }}" class="btn btn-secondary">Retour à la liste</a>
+    <div class="container mt-4">
+        <h1>{{ book.title }}</h1>
+        <p><strong>Auteur :</strong> {{ book.author }}</p>
+        <p><strong>Date de publication :</strong> {{ book.publishedDate|date('d/m/Y') }}</p>
+        <p><strong>Description :</strong> {{ book.description }}</p>
+        <a href="{{ path('book_list') }}" class="btn btn-secondary">Retour à la liste</a>
+    </div>
 {% endblock %}

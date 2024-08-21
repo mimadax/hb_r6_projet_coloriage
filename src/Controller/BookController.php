@@ -8,34 +8,26 @@ use App\Model\SearchData;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use App\Repository\BookRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class BookController extends AbstractController
 {
     #[Route('/', name: 'book_list')]
-    public function index(Request $request, EntityManagerInterface $entityManager): Response
+    public function index(EntityManagerInterface $entityManager, BookRepository $bookRepository, Request $request): Response
     {
-        // Création du formulaire de recherche
-    $searchData = new SearchData();
-    $searchForm = $this->createForm(SearchBookType::class, $searchData);
+        $searchData = new SearchData();
+        $searchForm = $this->createForm(SearchBookType::class, $searchData);
+        $searchForm->handleRequest($request);
 
-    $searchForm->handleRequest($request);
-    if ($searchForm->isSubmitted() && $searchForm->isValid()) {
-            dd($searchData);
-        }
+        $books = $bookRepository->findBySearch($searchData);
 
-    // Récupérer tous les livres depuis la base de données
-    $books = $entityManager->getRepository(Book::class)->findAll();
-    
-    // Rendre la vue avec le formulaire de recherche et les livres
-    return $this->render('book/index.html.twig', [
-        'books' => $books,
-        'search_form' => $searchForm->createView(),  // Transmet le formulaire au template
-    ]);
-
+        return $this->render('book/index.html.twig', [
+            'books' => $books,
+            'search_form' => $searchForm->createView(),
+        ]);
     }
-
 
     #[Route('/book/{id}', name: 'book_detail')]
     public function detail(Book $book): Response

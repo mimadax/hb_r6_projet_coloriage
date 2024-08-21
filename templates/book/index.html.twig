@@ -3,31 +3,35 @@
 {% block title %}Liste des livres{% endblock %}
 
 {% block body %}
-    <h1>Liste des livres</h1>
+    <div class="container mt-4">
+        <h1>Liste des livres</h1>
 
-    {{ form_start(search_form) }}
-        {{ form_row(search_form.q) }}
-        <button type="submit" class="btn btn-primary">Rechercher</button>
-    {{ form_end(search_form) }}
-
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-4">
-        {% if books is empty %}
-            <div class="col-12">
-                <div class="alert alert-warning">Aucun livre trouvé</div>
+        {{ form_start(search_form, {'attr': {'class': 'form-inline'}}) }}
+            <div class="form-group mb-2">
+                {{ form_row(search_form.q, {'attr': {'class': 'form-control', 'placeholder': 'Rechercher un livre...'}}) }}
             </div>
-        {% else %}
-            {% for book in books %}
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ book.title }}</h5>
-                            <p class="card-text">Auteur : {{ book.author }}</p>
-                            <a href="{{ path('book_detail', {'id': book.id}) }}" class="btn btn-primary">Détails</a>
+            <button type="submit" class="btn btn-primary mb-2">Rechercher</button>
+        {{ form_end(search_form) }}
+
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-4">
+            {% if books is empty %}
+                <div class="col-12">
+                    <div class="alert alert-warning">Aucun livre trouvé</div>
+                </div>
+            {% else %}
+                {% for book in books %}
+                    <div class="col">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ book.title }}</h5>
+                                <p class="card-text">Auteur : {{ book.author }}</p>
+                                <a href="{{ path('book_detail', {'id': book.id}) }}" class="btn btn-primary">Détails</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            {% endfor %}
-        {% endif %}
+                {% endfor %}
+            {% endif %}
+        </div>
     </div>
 {% endblock %}
 
