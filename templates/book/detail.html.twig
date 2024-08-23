@@ -21,6 +21,11 @@
         <p><strong>Date de publication :</strong> {{ book.publishedDate|date('d/m/Y') }}</p>
         <p><strong>Description :</strong> {{ book.description }}</p>
 
+        <!-- Bouton pour retour a la liste -->
         <a href="{{ path('book_list') }}" class="btn btn-secondary">Retour à la liste</a>
+
+        <!-- Bouton pour modifier le livre -->
+        <a href="{{ path('book_edit', {'id': book.id}) }}" class="btn btn-primary">Modifier</a>
+
     </div>
 {% endblock %}
