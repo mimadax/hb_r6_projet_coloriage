@@ -8,12 +8,7 @@
 
         {% if book.imageFilename %}
             <div class="mb-4">
-                <img 
-                    src="{{ asset('uploads/images/' ~ book.imageFilename) }}" 
-                    alt="{{ book.title }}" 
-                    class="img-fluid"
-                    style="max-width: 500px; max-height: 500px; object-fit: contain;"
-                >
+                <img src="{{ book.imageFilename }}" alt="{{ book.title }}">
             </div>
         {% endif %}
 

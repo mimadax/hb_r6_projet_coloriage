@@ -18,7 +18,8 @@ class AppFixtures extends Fixture
             $book->setTitle($faker->sentence())
                  ->setAuthor($faker->name())
                  ->setPublishedDate($faker->dateTimeBetween('-10 years'))
-                 ->setDescription($faker->paragraph(3));
+                 ->setDescription($faker->paragraph(3))
+                 ->setImageFilename('https://picsum.photos/200/300');
 
             $manager->persist($book);
         }
