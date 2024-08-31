@@ -3,14 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Book;
-use App\Form\BookType;
 use App\Form\SearchBookType;
-use App\Model\SearchData;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\BookRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use App\Repository\BookRepository;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -50,7 +46,17 @@ class BookController extends AbstractController
     public function detail(Book $book): Response
     {
         return $this->render('book/detail.html.twig', [
-            'book' => $book]);
+            'book' => $book
+        ]);
+    }
+
+    #[Route('/user/welcome', name: 'user_welcome')]
+    public function userWelcome(): Response
+    {
+        return $this->render('user/welcome.html.twig', [
+            'message' => 'Bienvenue sur votre espace utilisateur'
+        ]);
     }
 }
+
 
