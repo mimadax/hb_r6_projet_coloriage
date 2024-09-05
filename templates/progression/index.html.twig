@@ -1,20 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProgressionController!{% endblock %}
+{% block title %}Progression{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <div class="container mt-4">
+        <h1 class="mb-4">Progression: {{ progressPercentage }}%</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/symfony/hb_r6_projet_coloriage/src/Controller/ProgressionController.php</code></li>
-        <li>Your template at <code>C:/symfony/hb_r6_projet_coloriage/templates/progression/index.html.twig</code></li>
-    </ul>
-</div>
+        <form method="post" action="{{ path('progression_update', { 'id': book.id }) }}">
+            <div class="row">
+                {% for i in 1..100 %}
+                    {% set button = progressions[i] %}
+                    <div class="col-1 mb-2">
+                        <div class="btn btn-light d-flex align-items-center justify-content-center
+                                    {% if button.isChecked %}bg-success text-white{% endif %}"
+                            style="width: 60px; height: 60px; font-size: 1.5rem; border-radius: 0; position: relative;">
+                            <input type="checkbox" 
+                                name="progression_ids[]" 
+                                value="{{ i }}" 
+                                {% if button.isChecked %}checked{% endif %} 
+                                style="position: absolute; opacity: 0; cursor: pointer; width: 100%; height: 100%; z-index: 1;"
+                                onchange="this.form.submit();">
+                            {{ i }}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <input type="hidden" name="book_id" value="{{ book.id }}">
+        </form>
+    </div>
 {% endblock %}
+
+
+
+
