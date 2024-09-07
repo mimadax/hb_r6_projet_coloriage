@@ -3,3 +3,18 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+
+book_list:
+    path: /
+    controller: App\Controller\BookController::index
+    methods: GET
+
+book_detail:
+    path: /books/{id}/detail
+    controller: App\Controller\BookController::detail
+    methods: GET
+
+book_progress:
+    path: /books/{id}/progress
+    controller: App\Controller\BookController::progress
+    methods: GET

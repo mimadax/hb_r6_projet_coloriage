@@ -27,6 +27,11 @@
                                 <h5 class="card-title">{{ book.title }}</h5>
                                 <p class="card-text">Auteur : {{ book.author }}</p>
                                 <a href="{{ path('book_detail', {'id': book.id}) }}" class="btn btn-primary">Détails</a>
+
+                                 {# Bouton Progression visible uniquement pour les utilisateurs connectés #}
+                                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                    <a href="{{ path('progression_index', {'book': book.id}) }}" class="btn btn-secondary mt-2">Progression</a>
+                                {% endif %}
                             </div>
                         </div>
                     </div>

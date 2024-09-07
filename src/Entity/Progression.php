@@ -19,6 +19,14 @@ class Progression
     #[ORM\Column]
     private ?int $buttonNumber = null;
 
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Book $book = null;
+
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -29,7 +37,7 @@ class Progression
         return $this->isChecked;
     }
 
-    public function setChecked(bool $isChecked): static
+    public function setIsChecked(bool $isChecked): static
     {
         $this->isChecked = $isChecked;
 
@@ -44,6 +52,30 @@ class Progression
     public function setButtonNumber(int $buttonNumber): static
     {
         $this->buttonNumber = $buttonNumber;
+
+        return $this;
+    }
+
+    public function getBook(): ?Book
+    {
+        return $this->book;
+    }
+
+    public function setBook(?Book $book): static
+    {
+        $this->book = $book;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }

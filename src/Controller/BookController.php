@@ -50,13 +50,6 @@ class BookController extends AbstractController
         ]);
     }
 
-    #[Route('/user/welcome', name: 'user_welcome')]
-    public function userWelcome(): Response
-    {
-        return $this->render('user/welcome.html.twig', [
-            'message' => 'Bienvenue sur votre espace utilisateur'
-        ]);
-    }
 }
 
 
