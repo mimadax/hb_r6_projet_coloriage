@@ -5,7 +5,7 @@
     <!-- Nom du site à gauche -->
     <a class="navbar-brand" href="{{ path('book_list') }}">
       <img src="https://flowbite.com/docs/images/logo.svg" alt="Flowbite Logo" style="height: 2rem;">
-      Coloriage mystere
+      Coloriage Mystère
     </a>
 
     <!-- Bouton pour mobiles -->
@@ -20,17 +20,35 @@
           <a class="nav-link {% if route == 'book_list' %}active{% endif %}" href="{{ path('book_list') }}">Home</a>
         </li>
 
-        <!-- Lien de connexion ou redirection selon l'état de l'utilisateur -->
         {% if app.user %}
-          <li class="nav-item">
-            <a class="nav-link" href="{{ path('app_redirect') }}">Mon Espace</a>
+          <!-- Dropdown pour "Mon Espace" -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Mon Espace
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <li>
+                <a class="dropdown-item {% if route == 'user_images' %}active{% endif %}" href="{{ path('user_images') }}">Mes Images</a>
+              </li>
+              <li>
+                <a class="dropdown-item {% if route == 'user_upload' %}active{% endif %}" href="{{ path('user_upload') }}"> Uploader une image </a>
+              </li>
+
+          {% if is_granted('ROLE_ADMIN') %}
+              <li>
+                <a class="dropdown-item {% if route == 'admin_dashboard' %}active{% endif %}" href="{{ path('admin_dashboard') }}"> Amdin </a>
+              </li>
+
+          {% endif %}
+              <li>
+                <a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a>
+              </li>
+            </ul>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ path('app_logout') }}">Logout</a>
-          </li>
+          
         {% else %}
           <li class="nav-item">
-            <a class="nav-link" href="{{ path('app_login') }}">Login</a>
+            <a class="nav-link {% if route == 'app_login' %}active{% endif %}" href="{{ path('app_login') }}">Login</a>
           </li>
         {% endif %}
       </ul>

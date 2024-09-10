@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Galerie d'images{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1>Galerie d'images</h1>
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-4">
+        {% for image in images %}
+            <div class="col">
+                <div class="card h-100">
+                    <img src="{{ asset('uploads/images/' ~ image.filename) }}" class="card-img-top" alt="Image">
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+    <!-- Ajouter un bouton pour revenir à la liste des livres -->
+    <a href="{{ path('book_list') }}" class="btn btn-secondary mt-2">Retour à la liste des livres</a
+{% endblock %}

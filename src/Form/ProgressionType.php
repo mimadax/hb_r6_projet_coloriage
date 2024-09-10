@@ -24,3 +24,4 @@ class ProgressionType extends AbstractType
     }
 }
 
+

@@ -29,8 +29,8 @@
         </form>
     </div>
     <!-- Ajouter un bouton pour revenir à la liste des livres -->
-    <a href="{{ path('book_detail', {'id': book.id}) }}">Back to Details</a>
-    <a href="{{ path('book_list') }}">Back to Book List</a
+    <a href="{{ path('book_detail', {'id': book.id}) }}" class="btn btn-secondary mt-2">Retour à la liste détails</a></br>
+    <a href="{{ path('book_list') }}" class="btn btn-secondary mt-2">Retour à la liste des livres</a
 {% endblock %}
 
 

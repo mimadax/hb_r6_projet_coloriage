@@ -31,6 +31,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
+    #[ORM\Column]
+    private array $uploadedImages = [];
+
     public function getId(): ?int
     {
         return $this->id;
@@ -104,5 +107,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getUploadedImages(): ?array
+    {
+        return $this->uploadedImages;
+    }
+
+    public function setUploadedImages(?array $uploadedImages): static
+    {
+        $this->uploadedImages = $uploadedImages;
+
+        return $this;
     }
 }
